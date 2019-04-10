@@ -1,0 +1,125 @@
+$main-back: #fff;
+$light-gray: #f3f3f3;
+$bright: #687166;
+$prim-font: #828282;
+$sec-font: #b7ae90;
+$result: #455654;
+$history: #b7ae90;
+$base-font-size: 37px;
+
+html, body, #root {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Nunito, Arial, Helvetica, sans-serif;
+  font-weight: 200;
+  font-size: $base-font-size;
+  background: linear-gradient(#3E5151, #DECBA4)
+}
+
+.calculator {
+  width: 414px;
+  height: 736px;
+  box-shadow: 0 3px 15px 2px rgba(0,0,0,0.2);  
+  background: $main-back;
+
+  &__pad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    height: 500px;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $prim-font;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &:first-of-type {
+      color: $sec-font;
+    }
+
+    &:nth-of-type(4n + 4) {
+      background: $light-gray;
+    }
+
+    &:last-of-type {
+      background: $bright;
+      color: $main-back;
+    }
+
+    &--backspace {
+      font-size: 0;      
+
+      &::after {
+        content: "";
+        display: block;
+        width:33px;
+        height:21px;
+        background: url('/img/backspace.svg') center center no-repeat;
+        background-size: 100%;
+      }
+    }    
+
+    &::before {
+      content: '';
+      display: block;      
+      min-width: 0;
+      min-height: 0;
+      background: rgba(0,0,0,0.1);
+      border-radius: 50%;
+      position: absolute;
+      transition: all 0.1s ease-in-out;
+    }
+
+    &:active {
+      &::before {        
+        min-width: 100px;
+        min-height: 100px;
+      }
+    }
+  }
+
+  &__display {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid $light-gray;
+    height: calc(100% - 500px);
+  }
+
+  &__history, &__result {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+  }
+
+  &__history {
+    color: $history;
+    font-size: 27px;
+    padding-top: 41px;
+    flex-grow: 1;
+  }
+
+  &__result {
+    color: $result;
+    font-size: 72px;       
+    
+    >span {
+      transition: all .1s ease;
+    }
+  }
+}
